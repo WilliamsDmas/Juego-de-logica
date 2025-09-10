@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudia Logica Interactiva</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Logica matematica y programacion</h1>
+        <p>aprende optimizacion y algoritmos con juegos interactivos</p>
+    </header>
+    <main>
+        <section id="game-section">
+            <h2>Juego Optimiza las rutas</h2>
+            <p>Arrastra los nodos para conectar alamacenes con clientes y minimiza el costo total</p>
+            <canvas id="gameCanvas" width="600" height="400"></canvas>
+            <div id="score">Costo total: <span id="totalcost">0</span></div>
+            <button id="restBtn">Reiniciar</button>
+        </section>
+        <section id="lesson-seletion">
+            <h2>Leccion: Problema del Transporte</h2>
+            <p>El objetivo es asignar recursos de alamcen a clientes minimizando costos. Usa el juego para experimentar</p>
+            <p>Matematicas detras: Minimizar<em>C = ∑(c_ij * x_ij)</em>, donde<em>c_ij</em>es el costo y <em>x_ij</em>es la cantidad Transportada.</p>
+        </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.main.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
