@@ -1,46 +1,300 @@
-body{
-    font-family: Arial, sans-serif;
+:root {
+    --primary: #00d2ff;
+    --secondary: #3a7bd5;
+    --accent: #ff4b2b;
+    --bg-dark: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --text-light: #f8fafc;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    background-color: #f0f4f8;    
-    color: #333;
 }
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Background Animation */
+.background-animation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+}
+
+.background-animation::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, var(--primary) 0%, transparent 50%);
+    opacity: 0.05;
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Header */
 header {
-    background-color: #00698f;
-    color: white;
-    padding: 20px;
+    padding: 40px 20px;
     text-align: center;
+    background: linear-gradient(to bottom, rgba(15, 23, 42, 0.9), transparent);
 }
+
+.logo {
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo span {
+    font-weight: 300;
+}
+
+.sub-logo {
+    font-size: 1rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-top: 5px;
+}
+
+/* Layout */
 main {
-    max-width: 800px;
-    margin: 20px auto;
+    max-width: 1200px;
+    margin: 0 auto 40px;
     padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    flex-grow: 1;
 }
-#game-section, #lesson-section {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+@media (max-width: 1000px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Game Container */
+.game-container {
+    position: relative;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
     padding: 20px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+#canvas-wrapper {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+canvas {
+    max-width: 100%;
+    height: auto !important;
+}
+
+/* Game UI Overlay */
+.game-ui-overlay {
+    display: flex;
+    gap: 15px;
     margin-bottom: 20px;
 }
-canvas {
-    display: block;
-    margin: 0 auto;
-    border: 2px solid #00698f;
-    border-radius: 5px;
+
+.stat-card {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid var(--glass-border);
 }
-#score{
-    font-size: 18px;
-    margin: 10px 0;
+
+.stat-card .label {
+    font-size: 0.8rem;
+    opacity: 0.6;
+    margin-bottom: 5px;
 }
-#resetBtn {
-    background-color: #4CAF50;
+
+.stat-card .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.premium-btn {
+    padding: 12px 30px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    font-family: inherit;
+    font-weight: 600;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
-#resetBtn:hover {
-    background-color: #3e8e41;
+
+.premium-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.premium-btn.primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    box-shadow: 0 10px 20px -5px rgba(0, 210, 255, 0.4);
+}
+
+.premium-btn.primary:hover {
+    box-shadow: 0 15px 25px -5px rgba(0, 210, 255, 0.6);
+}
+
+/* Info Panel */
+.info-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px;
+}
+
+.info-card h3 {
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.info-card p {
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+.math-box {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    color: var(--primary);
+}
+
+.instructions h4 {
+    margin-bottom: 10px;
+}
+
+.instructions ul {
+    list-style: none;
+}
+
+.instructions ul li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+    opacity: 0.8;
+}
+
+.instructions ul li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 400px;
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.final-score {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 20px 0;
+    color: var(--primary);
 }
