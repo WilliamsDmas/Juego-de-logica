@@ -1,31 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudia Logica Interactiva</title>
+    <title>LogiQuest: Optimización de Rutas</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="background-animation"></div>
+    
     <header>
-        <h1>Logica matematica y programacion</h1>
-        <p>aprende optimizacion y algoritmos con juegos interactivos</p>
+        <div class="logo">Logi<span>Quest</span></div>
+        <div class="sub-logo">Maestría en Logística y Algoritmos</div>
     </header>
+
     <main>
-        <section id="game-section">
-            <h2>Juego Optimiza las rutas</h2>
-            <p>Arrastra los nodos para conectar alamacenes con clientes y minimiza el costo total</p>
-            <canvas id="gameCanvas" width="600" height="400"></canvas>
-            <div id="score">Costo total: <span id="totalcost">0</span></div>
-            <button id="restBtn">Reiniciar</button>
-        </section>
-        <section id="lesson-seletion">
-            <h2>Leccion: Problema del Transporte</h2>
-            <p>El objetivo es asignar recursos de alamcen a clientes minimizando costos. Usa el juego para experimentar</p>
-            <p>Matematicas detras: Minimizar<em>C = ∑(c_ij * x_ij)</em>, donde<em>c_ij</em>es el costo y <em>x_ij</em>es la cantidad Transportada.</p>
-        </section>
+        <div class="game-container">
+            <div class="game-ui-overlay">
+                <div class="stat-card">
+                    <span class="label">Nivel</span>
+                    <span id="levelDisplay" class="value">1</span>
+                </div>
+                <div class="stat-card">
+                    <span class="label">Costo Total</span>
+                    <span id="totalCost" class="value">0.00</span>
+                </div>
+                <div class="stat-card">
+                    <span class="label">Objetivo</span>
+                    <span id="targetCost" class="value">---</span>
+                </div>
+            </div>
+
+            <div id="canvas-wrapper">
+                <!-- p5.js will inject canvas here -->
+            </div>
+
+            <div class="controls">
+                <button id="resetBtn" class="premium-btn">Reiniciar Nivel</button>
+                <button id="nextLevelBtn" class="premium-btn primary" style="display: none;">Siguiente Nivel</button>
+            </div>
+        </div>
+
+        <aside class="info-panel">
+            <div class="info-card">
+                <h3>El Problema del Transporte</h3>
+                <p>Tu misión es ubicar los <strong>Almacenes (Nodos Azules)</strong> de forma estratégica para minimizar la distancia total hacia los <strong>Clientes (Nodos Rojos)</strong>.</p>
+                <div class="math-box">
+                    Minimizar: <code>C = ∑(distancia_i * demanda_i)</code>
+                </div>
+            </div>
+            <div class="instructions">
+                <h4>Cómo Jugar</h4>
+                <ul>
+                    <li>Arrastra los nodos azules para moverlos.</li>
+                    <li>Observa cómo cambia el costo en tiempo real.</li>
+                    <li>Intenta llegar lo más cerca posible al costo objetivo.</li>
+                </ul>
+            </div>
+        </aside>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.main.js"></script>
+
+    <div id="victory-modal" class="modal">
+        <div class="modal-content">
+            <h2>¡Excelente Optimización!</h2>
+            <p>Has encontrado una ruta altamente eficiente.</p>
+            <div class="final-score">Puntaje: <span id="finalScore">0</span>%</div>
+            <button id="modalNextBtn" class="premium-btn primary">Ver Siguiente Reto</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.2/p5.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
